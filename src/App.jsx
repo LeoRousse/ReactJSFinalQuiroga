@@ -2,14 +2,17 @@
 import React from 'react';
 import NavBar from './components/NavBar';
 import ItemListContainer from './components/ItemListContainer';
+import logo from './img/logo.jpg';
+
+console.log(logo);
 
 const App = () => {
   return (
-    <div className="columns">
-      <div className="column is-one-fifth">
-        <NavBar />
+    <div>
+      <div>
+        <NavBar url={logo}/>
       </div>
-      <div className="column">
+      <div>
         <ItemListContainer greeting="¡Bienvenido a nuestra tienda!" />
       </div>
     </div>
