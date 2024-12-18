@@ -4,8 +4,6 @@ import NavBar from './components/NavBar';
 import ItemListContainer from './components/ItemListContainer';
 import logo from './img/logo.jpg';
 
-console.log(logo);
-
 const App = () => {
   return (
     <div>

@@ -5,12 +5,16 @@ import {AiOutlineMenuUnfold} from "react-icons/ai";
 import {AiFillHome} from "react-icons/ai";
 import {VscGithub} from "react-icons/vsc";
 import {TiSocialLinkedinCircular} from "react-icons/ti";
-
-
+import SearchBar from "./SearchBar";
 
 
 
 const NavBar = ({url}) => {
+
+  const handleSubmit = (term)=>{
+    console.log("Hagamos una busqueda de: ", term)
+  }
+
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
@@ -34,9 +38,9 @@ const NavBar = ({url}) => {
             Inicio
           </a>
     
-          <a className="navbar-item">
-            <CartWidget/>
-          </a>
+          <div className="navbar-item">
+            <CartWidget />
+          </div>
 
           <a className="navbar-item" href="https://github.com/LeoRousse">
             <VscGithub size={20}/>
@@ -67,6 +71,11 @@ const NavBar = ({url}) => {
               </a>
             </div>
           </div>
+
+          <div className="navbar-item">
+            <SearchBar enSubmit={handleSubmit}/>
+          </div>
+
         </div>
     
         <div className="navbar-end">
