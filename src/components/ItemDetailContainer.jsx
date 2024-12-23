@@ -5,18 +5,18 @@ import { useParams } from "react-router-dom";
 
 function ItemDetailContainer() {
   const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true); // Estado para manejar la carga
+  const [loading, setLoading] = useState(true);
   const { itemId } = useParams();
 
   useEffect(() => {
     getProductById(itemId)
       .then(response => {
         setProduct(response);
-        setLoading(false); // Cambia el estado de carga a false
+        setLoading(false); 
       })
       .catch(error => {
         console.error(error);
-        setLoading(false); // Cambia el estado de carga a false en caso de error
+        setLoading(false);
       });
   }, [itemId]);
 
