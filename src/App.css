@@ -1,0 +1,14 @@
+/* App.css */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #d3d8fc;
+  }
+  
+  .section {
+    padding: 2rem 1.5rem;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
