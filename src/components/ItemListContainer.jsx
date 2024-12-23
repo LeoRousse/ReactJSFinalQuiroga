@@ -5,8 +5,8 @@ import { useParams } from "react-router-dom";
 
 function ItemListContainer({ greeting }) {
   const [products, setProducts] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("All"); // Estado para la categoría seleccionada
-  const { categoryId } = useParams(); // Obtener categoryId de los parámetros
+  const [selectedCategory, setSelectedCategory] = useState("All"); 
+  const { categoryId } = useParams(); 
 
   useEffect(() => {
     const asyncFunc = selectedCategory === "All" ? getProducts : getProductsByCategory;
@@ -18,7 +18,7 @@ function ItemListContainer({ greeting }) {
       .catch((error) => {
         console.error(error);
       });
-  }, [selectedCategory]); // Dependencia en selectedCategory
+  }, [selectedCategory]); 
 
   // Función para manejar el cambio de categoría
   const handleCategoryChange = (category) => {
