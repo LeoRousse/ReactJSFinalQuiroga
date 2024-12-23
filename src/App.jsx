@@ -12,7 +12,7 @@ function App() {
     <BrowserRouter>
       <NavBar url={logo}/>
       <Routes>
-        <Route exact path="/" element={<ItemListContainer greeting={"Todos nuestros productos"} />} />
+        <Route exact path="/" element={<ItemListContainer greeting={"Te presentamos nuestros cursos:"} />} />
         <Route exact path="/category/:categoryId" element={<ItemListContainer greeting={"Productos por categoría"} />} />
         <Route exact path="/item/:itemId" element={<ItemDetailContainer />} />
         <Route path="*" element={<h1 className="flex justify-center my-12 text-6xl text-center">ERROR 404 NOT FOUND</h1>} />
