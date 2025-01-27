@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import CartWidget from "./CartWidget";
-import { AiOutlineMenuUnfold, AiFillHome } from "react-icons/ai";
-import { VscGithub } from "react-icons/vsc";
-import { TiSocialLinkedinCircular } from "react-icons/ti";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import CartWidget from './CartWidget';
+import { AiOutlineMenuUnfold, AiFillHome } from 'react-icons/ai';
+import { VscGithub } from 'react-icons/vsc';
+import { TiSocialLinkedinCircular } from 'react-icons/ti';
 
 const NavBar = ({ url }) => {
   const [isActive, setIsActive] = useState(false);
@@ -15,11 +15,11 @@ const NavBar = ({ url }) => {
   return (
     <nav className="navbar is-spaced has-shadow" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <a className="navbar-item" href="#" onClick={toggleMenu}>
+        <a href="#" className="navbar-item" onClick={toggleMenu}>
           <AiOutlineMenuUnfold size={23} />
           <img src={url} alt="Logo" style={{ marginLeft: "10px", height: "40px" }} />
         </a>
-        <a
+        <a href="#"
           role="button"
           className={`navbar-burger ${isActive ? "is-active" : ""}`}
           aria-label="menu"

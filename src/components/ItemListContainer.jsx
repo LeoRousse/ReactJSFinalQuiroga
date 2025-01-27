@@ -1,58 +1,57 @@
-import { useState, useEffect } from "react";
-import { getProducts, getProductsByCategory } from "./asyncMock.jsx";
-import ItemList from "./ItemList.jsx";
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { NavLink, useParams } from 'react-router-dom';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../firebase/firebaseConfig.js';
+import ItemList from './ItemList.jsx';
 
 function ItemListContainer({ greeting }) {
-  const [products, setProducts] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("All"); 
+  const [ products, setProducts ] = useState([]);
+  const [ loading, setLoading ] = useState(true);
+
   const { categoryId } = useParams(); 
 
   useEffect(() => {
-    const asyncFunc = selectedCategory === "All" ? getProducts : getProductsByCategory;
+    setLoading(true);
 
-    asyncFunc(selectedCategory === "All" ? undefined : selectedCategory)
+    const itemsRef = collection(db, "items");
+
+    const q = categoryId ? query(itemsRef, where("category", "==", categoryId)) : itemsRef;
+
+    getDocs(q)
       .then((response) => {
-        setProducts(response);
+        const data = response.docs.map((doc) => ({ id: doc.id, ...doc.data()}));
+        setProducts(data);
       })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [selectedCategory]); 
 
-  // Función para manejar el cambio de categoría
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
-  };
+      .catch((error) => {
+        console.log("Error al hacer el fetch", error);
+      })
+
+      .finally(() => {
+        setLoading(false);
+      });
+
+    }, [categoryId]);
 
   return (
     <div className="container mt-6">
       <h1 className="title is-2 has-text-centered has-text-black my-5">{greeting}</h1>
       <div className="buttons is-centered mb-5">
-        <button 
-          className={`button ${selectedCategory === "All" ? "is-primary" : ""}`} 
-          onClick={() => handleCategoryChange("All")}
-        >
+        <NavLink to={`/`} className="">
           Todos
-        </button>
-        <button 
-          className={`button ${selectedCategory === "programming" ? "is-primary" : ""}`} 
-          onClick={() => handleCategoryChange("programming")}
-        >
+        </NavLink>
+        <NavLink to={`/category/programming`} className="">
           Programming
-        </button>
-        <button 
-          className={`button ${selectedCategory === "design" ? "is-primary" : ""}`} 
-          onClick={() => handleCategoryChange("design")}
-        >
+        </NavLink>
+        <NavLink to={`/category/design`} className="">
           Design
-        </button>
+        </NavLink>
       </div>
       {products.length > 0 ? (
         <ItemList products={products} />
       ) : (
         <div className="notification is-warning has-text-centered">
-          <p>No se encontraron productos en esta categoría.</p>
+          <p>No se encontraron productos de esta categoría.</p>
         </div>
       )}
     </div>

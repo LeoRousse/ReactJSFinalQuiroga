@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const Item = ({ id, name, img, price, stock }) => {
   return (
@@ -32,8 +32,8 @@ const Item = ({ id, name, img, price, stock }) => {
         <p className="is-size-5 has-text-grey-dark">
           Precio: <strong className="has-text-success">${price}</strong>
         </p>
-        <p className="is-size-6 has-text-grey">
-          Stock disponible: <strong>{stock}</strong>
+        <p className="is-size-6 has-text-black">
+          <strong className="has-text-black">Stock disponible: {stock}</strong>
         </p>
         <Link
           to={`/item/${id}`}

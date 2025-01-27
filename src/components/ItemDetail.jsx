@@ -1,6 +1,18 @@
-import ItemCount from "./ItemCount.jsx";
+import { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import ItemCount from './ItemCount.jsx';
+import { CartContext } from './Context.jsx';
 
 function ItemDetail({ id, name, img, category, description, price, stock }) {
+  const [ quantityAdded, setQuantityAdded ] = useState(0);
+  const { addItem } = useContext(CartContext);
+
+  const handleAdd = (quantity) => {
+    setQuantityAdded(quantity);
+    const item = { id, name, price };
+    addItem(item, quantity);
+  };
+
   return (
     <article className="box has-background-white-ter rounded-xl p-6 mt-6">
       <header className="has-text-centered mb-4">
@@ -30,13 +42,23 @@ function ItemDetail({ id, name, img, category, description, price, stock }) {
             <p className="is-size-4 has-text-grey-dark">
               Precio: <strong className="has-text-success">${price}</strong>
             </p>
+            <p>
+              Description: {description}
+            </p>
           </section>
           <footer className="mt-5">
-            <ItemCount
-              initial={1}
-              stock={stock}
-              onAdd={(quantity) => console.log("Cantidad Agregada ", quantity)}
-            />
+            {
+              quantityAdded > 0 ? (
+                /* Agregar estilos al /cart */
+                <Link to="/cart" className="button">Pagar</Link>
+              ) : (
+                <ItemCount
+                  initial={1}
+                  stock={stock}
+                  onAdd={handleAdd}
+                />
+              )
+            }
           </footer>
         </div>
       </div>
